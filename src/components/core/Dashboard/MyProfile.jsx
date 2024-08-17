@@ -10,6 +10,8 @@ export default function MyProfile() {
   const { user } = useSelector((state) => state.profile)
   const navigate = useNavigate()
 
+  console.log("this is user details" , user);
+
   const isStore=false
 
   return (

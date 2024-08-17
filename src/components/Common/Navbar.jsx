@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 
 function Navbar() {
   const location = useLocation()
-  const token = useSelector((state) => state.auth.token) // Assuming you have a token in your Redux store for authentication
+  const token = useSelector((state) => state.auth.token)
   // const token=null
   return (
     <div

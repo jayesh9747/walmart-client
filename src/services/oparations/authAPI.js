@@ -4,6 +4,7 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../api"
+import Cookies from 'js-cookie';
 
 
 const {
@@ -53,10 +54,10 @@ export function signUp(
     otp,
     navigate,
     contactNumber,
-    platform="web",
+    platform = "web",
 ) {
 
-    console.log("this is otp *************************************",otp);
+    console.log("this is otp *************************************", otp);
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -79,6 +80,7 @@ export function signUp(
                 throw new Error(response.data.message)
             }
             toast.success("Signup Successful")
+
             navigate("/login")
         } catch (error) {
             console.log("SIGNUP API ERROR............", error)
@@ -115,8 +117,13 @@ export function login(email, password, navigate) {
                 ? response.data.user.image
                 : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
             dispatch(setUser({ ...response.data.user, image: userImage }))
+
+            Cookies.set('token', response.data.token, { expires: 7, path: '' });
+            Cookies.set('storeToken', response.data.storeToken, { expires: 7, path: '' });
+
             localStorage.setItem("token", JSON.stringify(response.data.token))
             localStorage.setItem("storeToken", JSON.stringify(response.data.storeToken))
+
             navigate("/dashboard/my-profile")
         } catch (error) {
             console.log("LOGIN API ERROR............", error)
@@ -185,8 +192,8 @@ export function logout(navigate) {
     return (dispatch) => {
         dispatch(setToken(null))
         dispatch(setUser(null))
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
+        Cookies.remove('token');
+        Cookies.remove('storeToken')
         toast.success("Logged Out")
         navigate("/")
     }

@@ -5,18 +5,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import img from "../../assets/Images/profile.jpg"
 import useOnClickOutside from "../../hooks/useOnClickOutside"
-// import { logout } from "../../../services/operations/authAPI"
+import { logout } from "../../services/oparations/authAPI"
 
 export default function ProfileDropdown() {
-//   const { user } = useSelector((state) => state.profile)
-//   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.profile)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
   useOnClickOutside(ref, () => setOpen(false))
 
-//   if (!user) return null
+  if (!user) return null
 
   return (
     <button className="relative" onClick={() => setOpen(true)}>
@@ -34,7 +34,7 @@ export default function ProfileDropdown() {
           className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-white"
           ref={ref}
         >
-          <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
+          <Link to="/dashboard/analytics" onClick={() => setOpen(false)}>
             <div className="flex w-full items-center gap-x-1 py-[8px] px-[22px] text-sm text-richblue-500 hover:bg-blue-5 hover:text-richblue-900">
               <VscDashboard className="text-lg" />
               Dashboard
@@ -42,7 +42,7 @@ export default function ProfileDropdown() {
           </Link>
           <div
             onClick={() => {
-            //   dispatch(logout(navigate))
+              dispatch(logout(navigate))
               setOpen(false)
             }}
             className="flex w-full items-center gap-x-1 py-[8px] px-[22px] text-sm text-richblue-500 hover:bg-blue-5 hover:text-richblue-900"

@@ -92,7 +92,7 @@ function Delivery() {
       expectedArrival="2024-08-16 11:30 AM"
       dcLocation="Kurnool Distribution Center"
       orderDate="2024-08-15 9:30 AM"
-      isDispatched={false}
+      isDispatched={true}
       productsList={products}
     />
         <p className="text-2xl mt-8 text-richblue-400 font-semibold">Past Deliveries</p>
