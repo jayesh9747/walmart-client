@@ -11,19 +11,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    setSignupData(state, action) {
-      state.signupData = action.payload;
+    setSignupData(state, value) {
+      state.signupData = value.payload;
     },
-    setLoading(state, action) {
-      state.loading = action.payload;
+    setLoading(state, value) {
+      state.loading = value.payload;
     },
-    setToken(state, action) {
-      state.token = action.payload;
-      // if (action.payload) {
-      //   Cookies.set("token", action.payload, { expires: 7 }); 
-      // } else {
-      //   Cookies.remove("token");
-      // }
+    setToken(state, value) {
+      state.token = value.payload;
     },
     clearToken(state) {
       state.token = null;

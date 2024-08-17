@@ -29,9 +29,8 @@ function App() {
   useEffect(() => {
     if (Cookies.get("token")) {
       const token = Cookies.get("token");
+      console.log("this is token",token);
       dispatch(getUserDetails(token, navigate));
-      // dispatch(getUserDetails(token, navigate));
-      
     }
   }, []);
 

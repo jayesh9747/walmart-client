@@ -2,6 +2,7 @@ import { RiEditBoxLine } from "react-icons/ri"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ima from "../../../assets/Images/image.png"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
 
 import { formattedDate } from "../../../utils/dateFormatter"
 import IconBtn from "../../Common/IconBtn"
@@ -10,9 +11,9 @@ export default function MyProfile() {
   const { user } = useSelector((state) => state.profile)
   const navigate = useNavigate()
 
-  console.log("this is user details" , user);
+  console.log("this is user fetch from the apis",user);
 
-  const isStore=false
+  const isStore= user?.accountType === ACCOUNT_TYPE.STORE_MANAGER ? true : false
 
   return (
     <>
@@ -83,19 +84,19 @@ export default function MyProfile() {
             <div>
               <p className="mb-1 text-sm text-ddblue">First Name</p>
               <p className="text-md font-medium text-richblue-900">
-                {isStore?"Arun":"Shashwat"}
+                  { `${user?.firstName}`}
               </p>
             </div>
             <div>
               <p className="mb-1 text-sm text-ddblue">Email</p>
               <p className="text-md font-medium text-richblue-900">
-                {isStore?"arunjadhav@gmail.com":"ShashwatSingh@gmail.com"}
+                {user?.email}
               </p>
             </div>
             <div>
               <p className="mb-1 text-sm text-ddblue">Gender</p>
               <p className="text-md font-medium text-richblue-900">
-                Male
+                {user?.additionalDetails?.gender || "Male"}
               </p>
             </div>
           </div>
@@ -103,20 +104,21 @@ export default function MyProfile() {
           <div>
               <p className="mb-1 text-sm text-ddblue">Last Name</p>
               <p className="text-md font-medium text-richblue-900">
-                {isStore?"Jadhav":"Singh"}
+                {user?.lastName}
               </p>
             </div>
             <div>
               <p className="mb-1 text-sm text-ddblue">Employee Id</p>
               <p className="text-md font-medium text-richblue-900">
-                {isStore?"12gurh42647bfju9373":"dfu36489395ijbfb47892"}
+                {user?._id}
               </p>
             </div>
             <div>
               <p className="mb-1 text-sm text-ddblue">Date Of Birth</p>
               <p className="text-sm font-medium text-richblue-900">
                 {
-                  "Add Date Of Birth"}
+                  user?.additionalDetails.dateOfBirth || "Add the  Date of Birth"
+                }
               </p>
             </div>
           </div>

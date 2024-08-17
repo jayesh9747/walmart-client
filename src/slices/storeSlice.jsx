@@ -11,19 +11,14 @@ const storeSlice = createSlice({
   name: "store",
   initialState: initialState,
   reducers: {
-    setStoreData(state, action) {
-      state.StoreData = action.payload;
+    setStoreData(state, value) {
+      state.StoreData = value.payload;
     },
-    setLoading(state, action) {
-      state.loading = action.payload;
+    setLoading(state, value) {
+      state.loading = value.payload;
     },
-    setToken(state, action) {
-      state.token = action.payload;
-      if (action.payload) {
-        Cookies.set("storeToken", action.payload, { expires: 7 });
-      } else {
-        Cookies.remove("storeToken");
-      }
+    setToken(state, value) {
+      state.token = value.payload;
     },
     clearToken(state) {
       state.token = null;
